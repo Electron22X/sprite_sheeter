@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sprite Sheet Cutter</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
+</head>
+<body>
+    <div class="app-container">
+        <header>
+            <h1>Sprite Sheet Cutter</h1>
+            <div class="header-controls">
+                <button id="download-zip" class="primary-btn">Download as ZIP</button>
+            </div>
+        </header>
+
+        <main>
+            <div class="sidebar">
+                <section class="control-group">
+                    <h3>Grid Settings</h3>
+                    <div class="input-row">
+                        <label for="grid-cols">Columns:</label>
+                        <input type="number" id="grid-cols" value="8" min="1">
+                    </div>
+                    <div class="input-row">
+                        <label for="grid-rows">Rows:</label>
+                        <input type="number" id="grid-rows" value="8" min="1">
+                    </div>
+                    <div class="input-row">
+                        <label for="cell-width">Cell Width:</label>
+                        <input type="number" id="cell-width" value="32" min="1">
+                    </div>
+                    <div class="input-row">
+                        <label for="cell-height">Cell Height:</label>
+                        <input type="number" id="cell-height" value="32" min="1">
+                    </div>
+                    <div class="input-row">
+                        <label for="offset-x">Offset X:</label>
+                        <input type="number" id="offset-x" value="0">
+                    </div>
+                    <div class="input-row">
+                        <label for="offset-y">Offset Y:</label>
+                        <input type="number" id="offset-y" value="0">
+                    </div>
+                    <button id="define-grid-bounds">Define Grid by Selection</button>
+                    <button id="apply-grid">Apply Grid Settings</button>
+                </section>
+
+                <section class="control-group">
+                    <h3>Selection</h3>
+                    <button id="select-all">Select All</button>
+                    <button id="deselect-all">Deselect All</button>
+                    <button id="merge-cells">Merge Selected</button>
+                    <button id="reset-selection">Reset Selections</button>
+                </section>
+
+                <section class="control-group">
+                    <h3>Batch Renaming</h3>
+                    <div class="input-row">
+                        <label for="prefix">Prefix:</label>
+                        <input type="text" id="prefix" value="sprite_">
+                    </div>
+                    <button id="batch-rename">Rename All</button>
+                </section>
+
+                <section class="control-group">
+                    <h3>Display Options</h3>
+                    <div class="input-row">
+                        <label for="toggle-indices">Show Indices:</label>
+                        <input type="checkbox" id="toggle-indices" checked>
+                    </div>
+                    <div class="input-row">
+                        <label for="toggle-pixelation">Pixelation:</label>
+                        <input type="checkbox" id="toggle-pixelation">
+                    </div>
+                </section>
+
+                <section class="control-group">
+                    <h3>Zoom</h3>
+                    <div class="zoom-controls">
+                        <button id="zoom-out" aria-label="Zoom Out">-</button>
+                        <span id="zoom-level">100%</span>
+                        <button id="zoom-in" aria-label="Zoom In">+</button>
+                    </div>
+                </section>
+            </div>
+
+            <div class="canvas-container" id="canvas-container">
+                <div class="drop-zone" id="drop-zone" tabindex="0">
+                    <p>Drag and drop sprite sheet here or click to upload</p>
+                    <input type="file" id="file-upload" accept="image/*" hidden>
+                </div>
+                <div id="canvas-wrapper" style="display:none;">
+                    <canvas id="main-canvas" aria-label="Sprite Sheet Editor"></canvas>
+                    <div id="status-bar" class="status-bar">
+                        <span id="cursor-pos">Row: 0, Col: 0</span>
+                        <span id="pixel-pos">X: 0, Y: 0</span>
+                    </div>
+                </div>
+            </div>
+        </main>
+
+        <section class="preview-section">
+            <h2>Extracted Sprites</h2>
+            <div id="preview-grid" class="preview-grid">
+                <!-- Preview items will be injected here -->
+            </div>
+        </section>
+    </div>
+    <script src="app.js"></script>
+</body>
+</html>
